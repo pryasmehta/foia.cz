@@ -724,11 +724,53 @@
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 1rem;
+            width: 100%;
         }
 
         .form-submit:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 40px rgba(45, 106, 84, 0.25);
+        }
+
+        .form-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-message {
+            margin-top: 1.5rem;
+            padding: 1.2rem;
+            border-radius: 12px;
+            display: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            animation: slideIn 0.4s ease;
+        }
+
+        .form-message.success {
+            display: block;
+            background: rgba(29, 158, 117, 0.1);
+            color: #0F6E56;
+            border: 1px solid rgba(29, 158, 117, 0.3);
+        }
+
+        .form-message.error {
+            display: block;
+            background: rgba(220, 53, 69, 0.1);
+            color: #a73a4a;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .social-links {
@@ -1190,23 +1232,26 @@
             <p class="section-description">Have a project in mind? Want to discuss technology strategy? I'm here to help bring your ideas to life.</p>
             
             <div class="contact-form">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" placeholder="Enter your name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="your@email.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" placeholder="What's this about?" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" placeholder="Tell me about your project or inquiry..." required></textarea>
-                </div>
-                <button class="form-submit" onclick="handleFormSubmit()">Send Message</button>
+                <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Tell me about your project or inquiry..." required></textarea>
+                    </div>
+                    <button type="submit" class="form-submit" id="submitBtn">Send Message</button>
+                </form>
+                <div class="form-message" id="formMessage"></div>
             </div>
 
             <div class="social-links">
@@ -1219,7 +1264,7 @@
     <footer>
         <div class="footer-content">
             <p class="footer-text">Pryas Mehta | IT Consultant & Full Stack Developer</p>
-            <p class="footer-text">Building digital solutions with purpose • Based in Prague, Czech Republic</p>
+            <p class="footer-text">Building digital solutions with purpose • Based in Ostrava, Czech Republic</p>
             <p class="footer-text" style="font-size: 0.85rem; opacity: 0.7;">© 2024 All rights reserved. Crafted with attention to detail.</p>
         </div>
     </footer>
@@ -1253,24 +1298,73 @@
             observer.observe(element);
         });
 
-        function handleFormSubmit() {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
+            const submitBtn = document.getElementById('submitBtn');
+            const formMessage = document.getElementById('formMessage');
 
+            // Validation
             if (!name || !email || !subject || !message) {
-                alert('Please fill in all fields');
+                formMessage.textContent = '❌ Please fill in all fields';
+                formMessage.className = 'form-message error';
                 return;
             }
 
-            const mailtoLink = `mailto:pryasmehta21@.com?subject=${encodeURIComponent('New Contact: ' + subject)}&body=${encodeURIComponent(`From: ${name}\nEmail: ${email}\n\n${message}`)}`;
-            window.location.href = mailtoLink;
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            formMessage.textContent = '';
+            formMessage.className = 'form-message';
 
-            document.getElementById('name').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('subject').value = '';
-            document.getElementById('message').value = '';
+            // Create form data
+            const formData = new FormData();
+            formData.append('access_key', 'c183ed45-c834-4c75-9436-fa8900e559d8'); // Web3Forms public key
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('subject', subject);
+            formData.append('message', message);
+            formData.append('from_name', 'Portfolio Contact Form');
+
+            // Send email via Web3Forms
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    formMessage.textContent = '✅ Thank you! Your message has been sent successfully. We will reach out to you soon!';
+                    formMessage.className = 'form-message success';
+                    
+                    // Reset form
+                    document.getElementById('contactForm').reset();
+                    
+                    // Re-enable button
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Message';
+                    
+                    // Hide message after 6 seconds
+                    setTimeout(() => {
+                        formMessage.style.display = 'none';
+                    }, 6000);
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                formMessage.textContent = '❌ Error sending message. Please try again or contact us directly at your-actual-email@example.com';
+                formMessage.className = 'form-message error';
+                
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            });
         }
 
         const serviceCards = document.querySelectorAll('.service-card');
