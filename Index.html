@@ -1,126 +1,1286 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Friends of India Association | FOIA</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pryas Mehta | IT Consultant & Full Stack Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #faf8f3 0%, #f5f1eb 100%);
+            color: #2c2416;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary-dark: #1a4d3e;
+            --primary: #2d6a54;
+            --primary-light: #4a9a7a;
+            --accent-gold: #d4a574;
+            --accent-gold-light: #e8c9a0;
+            --text-dark: #1a1410;
+            --text-light: #6b6259;
+            --bg-light: #faf8f3;
+            --bg-card: #ffffff;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(250, 248, 243, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            border-bottom: 1px solid rgba(45, 106, 84, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a4d3e 0%, #d4a574 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent-gold) 100%);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #1a4d3e 0%, #2d6a54 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(45, 106, 84, 0.25);
+        }
+
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(45, 106, 84, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: 10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212, 165, 116, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 25s ease-in-out infinite 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            letter-spacing: -1px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2.5rem;
+        }
+
+        .secondary-button {
+            background: transparent;
+            color: var(--primary);
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .secondary-button:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(45, 106, 84, 0.1);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent-gold) 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .about-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(45, 106, 84, 0.15);
+        }
+
+        .about-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .about-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .about-card h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+        }
+
+        .about-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .about-card p + p {
+            margin-top: 1rem;
+        }
+
+        .about-card strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(45, 106, 84, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent-gold) 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(45, 106, 84, 0.1);
+            border-color: var(--primary-light);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .timeline {
+            position: relative;
+            margin-top: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--accent-gold) 100%);
+            top: 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            width: 45%;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: 0;
+            text-align: right;
+            padding-right: 5%;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: 55%;
+            text-align: left;
+            padding-left: 5%;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.8s; }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--accent-gold);
+            border: 4px solid var(--bg-light);
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 3px solid var(--primary);
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            border-left: none;
+            border-right: 3px solid var(--primary);
+        }
+
+        .timeline-year {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            font-size: 0.95rem;
+            color: var(--accent-gold);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .skill-tag {
+            background: var(--bg-card);
+            padding: 1.2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid rgba(45, 106, 84, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-tag:hover {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-gold) 100%);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-5px);
+        }
+
+        .skill-tag:hover .skill-name {
+            color: white;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 1px solid rgba(45, 106, 84, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent-gold) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.1);
+        }
+
+        .project-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            width: fit-content;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .project-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-impact {
+            background: rgba(45, 106, 84, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-gold);
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(45, 106, 84, 0.12);
+        }
+
+        .impact-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .impact-card {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .impact-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .impact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(45, 106, 84, 0.25);
+        }
+
+        .impact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .impact-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .impact-description {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-container {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-form {
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 1rem;
+            border: 2px solid rgba(45, 106, 84, 0.2);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: var(--bg-card);
+            color: var(--text-dark);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(45, 106, 84, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-submit {
+            background: linear-gradient(135deg, #1a4d3e 0%, #2d6a54 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(45, 106, 84, 0.25);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .timeline::before {
+                display: none;
+            }
+
+            .timeline-item {
+                width: 100%;
+                margin-left: 0 !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                text-align: left !important;
+            }
+
+            .timeline-content {
+                border-left: 3px solid var(--primary);
+                border-right: none;
+            }
+
+            .timeline-dot {
+                left: 0;
+                transform: translateX(-45px);
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .impact-highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .cta-button,
+            .secondary-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            header {
+                padding: 0.8rem 4%;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            section {
+                padding: 4rem 4%;
+            }
+        }
+
+        .fade-in-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .fade-in-scroll.visible {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
 </head>
-
 <body>
+    <header>
+        <nav>
+            <div class="logo">PM</div>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView()">Get In Touch</button>
+        </nav>
+    </header>
 
-<header>
-<div class="container nav">
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Building Digital Solutions with <span class="highlight">Purpose & Impact</span></h1>
+            <p class="subtitle">IT Consultant | Full Stack Developer | Technology Leader</p>
+            <p style="color: var(--text-light); font-size: 1.1rem; max-width: 700px; margin: 1.5rem auto;">
+                Helping startups and enterprises modernize operations, streamline processes, and scale with intelligent technology solutions.
+            </p>
+            <div class="hero-buttons">
+                <button class="cta-button" onclick="document.getElementById('projects').scrollIntoView()">View My Work</button>
+                <a href="#contact" class="secondary-button">Start a Project</a>
+            </div>
+        </div>
+    </section>
 
-<div class="logo">
-<!-- Add logo later -->
-FOIA
-</div>
+    <section id="about" class="fade-in-scroll">
+        <span class="section-label">About Me</span>
+        <h2 class="section-title">Bridging Technology & Business</h2>
+        <p class="section-description">With over 4 years of professional experience, I've led teams, architected solutions, and delivered measurable impact across diverse industries.</p>
+        
+        <div class="about-grid">
+            <div class="about-card">
+                <span class="about-card-icon">🎯</span>
+                <h3>My Approach</h3>
+                <p>I believe technology should solve real business problems. Every solution I create starts with understanding your challenges deeply—whether it's digitizing legacy systems, optimizing workflows, or building innovative platforms from scratch.</p>
+                <p>My focus is on delivering <strong>measurable impact</strong> with clean, scalable solutions that grow with your business.</p>
+            </div>
 
-<nav>
-<a href="index.html">Home</a>
-<a href="contact.html">Contact</a>
-</nav>
+            <div class="about-card">
+                <span class="about-card-icon">🌍</span>
+                <h3>Experience</h3>
+                <p><strong>Global Teams:</strong> Led QA teams across EMEA regions (UK, Poland, Spain, Czech Republic, Germany, France, Israel, UAE, Egypt) for CEMEX, a Fortune 500 company.</p>
+                <p><strong>Multiple Domains:</strong> Enterprise platforms, mobile applications (iOS/Android), ERP systems (Salesforce, SAP), and infrastructure management.</p>
+                <p><strong>4+ Years:</strong> Proven track record in quality leadership, digital transformation, and IT consulting.</p>
+            </div>
 
-</div>
-</header>
+            <div class="about-card">
+                <span class="about-card-icon">⚡</span>
+                <h3>Specialties</h3>
+                <p><strong>IT Consulting:</strong> Technology strategy, digital transformation, process optimization, SEO/AEO strategies, AI integration.</p>
+                <p><strong>Development:</strong> Web & mobile platforms, database architecture, backend systems, full-stack solutions.</p>
+                <p><strong>Quality & Leadership:</strong> QA strategy, team mentorship, risk management, production coordination.</p>
+            </div>
+        </div>
+    </section>
 
+    <section id="services">
+        <span class="section-label">What I Offer</span>
+        <h2 class="section-title">Services</h2>
+        <p class="section-description">Comprehensive solutions tailored to drive growth and innovation for your business.</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🔍</div>
+                <h3>Digital Transformation</h3>
+                <p>Modernize legacy systems, automate workflows, and integrate digital tools across your organization. I help companies transition from paper-based to fully automated processes.</p>
+            </div>
 
-<section class="hero">
+            <div class="service-card">
+                <div class="service-icon">🏗️</div>
+                <h3>Full Stack Development</h3>
+                <p>Build custom web and mobile applications from concept to deployment. From frontend design to backend architecture, I create scalable solutions that users love.</p>
+            </div>
 
-<div class="container">
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>IT Consulting</h3>
+                <p>Strategic technology guidance for startups and enterprises. Includes process optimization, technology selection, database design, and AI/ML integration strategies.</p>
+            </div>
 
-<h1>Friends of India Association</h1>
-<p>Strengthening relations between India and the Czech Republic</p>
+            <div class="service-card">
+                <div class="service-icon">🔬</div>
+                <h3>Quality Assurance & Testing</h3>
+                <p>Comprehensive QA strategy development, test planning, and quality metrics definition. Ensure your products are robust, reliable, and ready for production.</p>
+            </div>
 
-</div>
+            <div class="service-card">
+                <div class="service-icon">👥</div>
+                <h3>Team Leadership & Mentoring</h3>
+                <p>Build and develop high-performing teams. I provide coaching, process improvement guidance, and knowledge transfer across cross-functional teams.</p>
+            </div>
 
-</section>
+            <div class="service-card">
+                <div class="service-icon">🎯</div>
+                <h3>SEO & Search Optimization</h3>
+                <p>Optimize your web presence for search engines and AI-powered search platforms. Implement modern SEO, GEO, and AEO strategies to increase visibility.</p>
+            </div>
+        </div>
+    </section>
 
+    <section>
+        <span class="section-label">Impact Stories</span>
+        <h2 class="section-title">IT Consulting Achievements</h2>
+        <p class="section-description">Real results from helping organizations transform through technology.</p>
+        
+        <div class="impact-highlights">
+            <div class="impact-card">
+                <div class="impact-icon">🌍</div>
+                <div class="impact-title">Global Digital Platform</div>
+                <div class="impact-description">Led QA for order management digitization across 9 countries (EMEA region), supporting CEMEX's transformation from manual to fully digital workflows.</div>
+            </div>
 
-<section class="container section">
+            <div class="impact-card">
+                <div class="impact-icon">♻️</div>
+                <div class="impact-title">Sustainability Award</div>
+                <div class="impact-description">Paperless Deliveries project recognized with Outstanding Project for Sustainable Development award—eliminating paper-based delivery tickets and reducing operational waste.</div>
+            </div>
 
-<h2>About FOIA</h2>
+            <div class="impact-card">
+                <div class="impact-icon">⚙️</div>
+                <div class="impact-title">Process Optimization</div>
+                <div class="impact-description">Designed and implemented comprehensive QA processes for complex enterprise systems, improving test coverage, reducing defects, and accelerating time-to-market.</div>
+            </div>
 
-<p>
-FRIENDS OF INDIA z. s. supports the development, enrichment and improvement
-of relations between India and the Czech Republic in cultural,
-social, educational and economic areas.
-</p>
+            <div class="impact-card">
+                <div class="impact-icon">👥</div>
+                <div class="impact-title">Team Development</div>
+                <div class="impact-description">Built and mentored QA teams across multiple regions, establishing best practices, knowledge sharing frameworks, and high-performing team culture.</div>
+            </div>
 
-</section>
+            <div class="impact-card">
+                <div class="impact-icon">🔧</div>
+                <div class="impact-title">Technology Consulting</div>
+                <div class="impact-description">Provided IT consulting for Czech association (Foia.cz) and local business (Bishnoi s.r.o.), advising on technology selection, database design, and digital strategy.</div>
+            </div>
 
+            <div class="impact-card">
+                <div class="impact-icon">🚀</div>
+                <div class="impact-title">Startup Partnership</div>
+                <div class="impact-description">Full-cycle involvement with Palisandr.in—development management, QA strategy, business consultation, and stakeholder engagement.</div>
+            </div>
+        </div>
+    </section>
 
-<section class="container section">
+    <section>
+        <span class="section-label">Skills & Technologies</span>
+        <h2 class="section-title">Expertise</h2>
+        
+        <div class="skills-grid">
+            <div class="skill-tag">
+                <div class="skill-name">QA & Testing</div>
+            </div>
+            <div class="skill-tag">
+                <div class="skill-name">Test Automation</div>
+            </div>
+            <div class="skill-tag">
+                <div class="skill-name">Mobile (iOS/Android)</div>
+            </div>
+            <div class="skill-tag">
+                <div class="skill-name">Web Development</div>
+            </div>
+            <div class="skill-tag">
+                <div class="skill-name">SQL & Databases</div>
+            </div>
+            <div class="skill-tag">
+                <div class="skill-name">Agile/Scrum</div>
+            </div>
+            <div class="skill-tag">
+                <div class="skill-name">Team Leadership</div>
+            </div>
+            <div class="skill-tag">
+                <div class="skill-name">Digital Strategy</div>
+            </div>
+            <div class="skill-tag">
+                <div class="skill-name">Process Optimization</div>
+            </div>
+            <div class="skill-tag">
+                <div class="skill-name">Risk Management</div>
+            </div>
+            <div class="skill-tag">
+                <div class="skill-name">Salesforce/SAP</div>
+            </div>
+            <div class="skill-tag">
+                <div class="skill-name">IT Consulting</div>
+            </div>
+        </div>
+    </section>
 
-<h2>Main Activities</h2>
+    <section id="experience">
+        <span class="section-label">Professional Journey</span>
+        <h2 class="section-title">Experience</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2024 - Present</div>
+                    <div class="timeline-title">Team Lead, Quality Engineer</div>
+                    <div class="timeline-company">CEMEX (Global)</div>
+                    <div class="timeline-description">Leading end-to-end QA lifecycle for complex order management platform across EMEA. Mentoring teams, setting quality standards, managing production releases, and driving continuous improvement.</div>
+                </div>
+            </div>
 
-<ul class="activity-list">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2022 - 2024</div>
+                    <div class="timeline-title">Quality Engineer, Key QA Leader</div>
+                    <div class="timeline-company">CEMEX (Paperless Deliveries & UK Acceleration)</div>
+                    <div class="timeline-description">Executed comprehensive testing for digital transformation projects. Recognized with Sustainable Development award. Coordinated UAT, SIT, regression testing across multiple platforms.</div>
+                </div>
+            </div>
 
-<li>Organizing thematic events, meetings of members and guests to exchange experiences and build relationships.</li>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2022 - 2022</div>
+                    <div class="timeline-title">Quality Engineer</div>
+                    <div class="timeline-company">DHL IT Services (Mauritius)</div>
+                    <div class="timeline-description">Validated Salesforce CRM and SAP integration. Performed manual and automated testing. Ensured system reliability and data integrity for internal operations.</div>
+                </div>
+            </div>
 
-<li>Developing relations between the Czech Republic and India and cooperating with cultural and economic organizations.</li>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2020 - 2021</div>
+                    <div class="timeline-title">1st Line Support Specialist</div>
+                    <div class="timeline-company">Wipro Limited (E.ON, RWE, Innogy)</div>
+                    <div class="timeline-description">Managed large-scale Wintel infrastructure. Handled L2/L3 incidents, patching activities, server decommissioning, and ITIL-based incident management.</div>
+                </div>
+            </div>
 
-<li>Initiating activities supporting international cooperation and exchange of information between the two countries.</li>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2020 - Present</div>
+                    <div class="timeline-title">Freelance & IT Consultant</div>
+                    <div class="timeline-company">Multiple Projects</div>
+                    <div class="timeline-description">Full-stack development (Palisandr.in, Foia.cz), IT consulting (Bishnoi s.r.o.), business strategy, technology selection, database optimization, and SEO/AEO guidance.</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<li>Supporting research, education, universities and cultural development aligned with the association’s mission.</li>
+    <section id="projects">
+        <span class="section-label">Featured Work</span>
+        <h2 class="section-title">Key Projects</h2>
+        
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">🏢</div>
+                <div class="project-content">
+                    <span class="project-tag">Enterprise QA</span>
+                    <h3 class="project-title">CEMEX Order Management</h3>
+                    <p class="project-description">Digitized order placement and fulfillment across 9 countries. Led QA strategy, test planning, and execution for web and mobile platforms supporting complex business logic.</p>
+                    <div class="project-impact">✓ Multi-region rollout | ✓ Fortune 500 client | ✓ High-volume transactions</div>
+                </div>
+            </div>
 
-</ul>
+            <div class="project-card">
+                <div class="project-image">📱</div>
+                <div class="project-content">
+                    <span class="project-tag">Digital Innovation</span>
+                    <h3 class="project-title">Paperless Deliveries</h3>
+                    <p class="project-description">Eliminated paper-based delivery tickets with fully digital mobile solution. Recognized with Sustainable Development award for operational efficiency and environmental impact.</p>
+                    <div class="project-impact">✓ Award-winning project | ✓ Sustainability focus | ✓ Driver empowerment</div>
+                </div>
+            </div>
 
-</section>
+            <div class="project-card">
+                <div class="project-image">🌐</div>
+                <div class="project-content">
+                    <span class="project-tag">Web Development</span>
+                    <h3 class="project-title">Foia.cz</h3>
+                    <p class="project-description">Full website development for Czech-based association. Handled design, development, deployment, and ongoing optimization for government transparency platform.</p>
+                    <div class="project-impact">✓ Live production | ✓ Full-stack development | ✓ SEO optimized</div>
+                </div>
+            </div>
 
+            <div class="project-card">
+                <div class="project-image">💼</div>
+                <div class="project-content">
+                    <span class="project-tag">Startup Consulting</span>
+                    <h3 class="project-title">Palisandr.in</h3>
+                    <p class="project-description">Complete involvement from development management to QA strategy and business consulting. Worked directly with stakeholders on product vision and technology decisions.</p>
+                    <div class="project-impact">✓ Full-cycle delivery | ✓ Stakeholder management | ✓ Business strategy</div>
+                </div>
+            </div>
 
-<section class="container section">
+            <div class="project-card">
+                <div class="project-image">⚙️</div>
+                <div class="project-content">
+                    <span class="project-tag">IT Consulting</span>
+                    <h3 class="project-title">Bishnoi s.r.o.</h3>
+                    <p class="project-description">Ongoing IT consulting for Czech company. Technology recommendations, database optimization, partner integration, and AI advancement strategy for business growth.</p>
+                    <div class="project-impact">✓ Long-term partnership | ✓ Strategic guidance | ✓ Tech modernization</div>
+                </div>
+            </div>
 
-<h2>Goal of the Association</h2>
+            <div class="project-card">
+                <div class="project-image">🔧</div>
+                <div class="project-content">
+                    <span class="project-tag">Infrastructure</span>
+                    <h3 class="project-title">Wintel Infrastructure Management</h3>
+                    <p class="project-description">Managed large-scale Windows/Intel infrastructure for energy sector clients (E.ON, RWE, Innogy). Incident management, patching, monitoring, and SLA compliance.</p>
+                    <div class="project-impact">✓ Multi-geography | ✓ Critical infrastructure | ✓ ITIL processes</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<p>
-The goal of the association is cooperation with entrepreneurs,
-government authorities and institutions in order to strengthen
-mutually beneficial relations between the Czech Republic and India.
-</p>
+    <section id="contact">
+        <div class="contact-container">
+            <span class="section-label">Get In Touch</span>
+            <h2 class="section-title">Let's Work Together</h2>
+            <p class="section-description">Have a project in mind? Want to discuss technology strategy? I'm here to help bring your ideas to life.</p>
+            
+            <div class="contact-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" placeholder="What's this about?" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Tell me about your project or inquiry..." required></textarea>
+                </div>
+                <button class="form-submit" onclick="handleFormSubmit()">Send Message</button>
+            </div>
 
-</section>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/ing-pryas-mehta-8537b9163/" class="social-link" target="_blank" title="LinkedIn">in</a>
+                <a href="mailto:pryasmehta21@gmail.com" class="social-link" title="Email">✉</a>
+            </div>
+        </div>
+    </section>
 
+    <footer>
+        <div class="footer-content">
+            <p class="footer-text">Pryas Mehta | IT Consultant & Full Stack Developer</p>
+            <p class="footer-text">Building digital solutions with purpose • Based in Prague, Czech Republic</p>
+            <p class="footer-text" style="font-size: 0.85rem; opacity: 0.7;">© 2024 All rights reserved. Crafted with attention to detail.</p>
+        </div>
+    </footer>
 
-<section class="container section">
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
 
-<h2>Added Value</h2>
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
 
-<p>
-The added value of FRIENDS OF INDIA z. s. is the active development
-of contacts, strengthening international relations and supporting
-long-term cooperation between Czech and Indian partners.
-</p>
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
 
-</section>
+        document.querySelectorAll('.fade-in-scroll').forEach(element => {
+            observer.observe(element);
+        });
 
+        function handleFormSubmit() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
 
-<footer>
+            if (!name || !email || !subject || !message) {
+                alert('Please fill in all fields');
+                return;
+            }
 
-<div class="container footer-grid">
+            const mailtoLink = `mailto:pryasmehta21@.com?subject=${encodeURIComponent('New Contact: ' + subject)}&body=${encodeURIComponent(`From: ${name}\nEmail: ${email}\n\n${message}`)}`;
+            window.location.href = mailtoLink;
 
-<div>
-<h3>Friends of India Association</h3>
-<p>Building bridges between India and the Czech Republic.</p>
-</div>
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('subject').value = '';
+            document.getElementById('message').value = '';
+        }
 
-<div>
-<h3>Contact</h3>
-<p>Email: info@example.com</p>
-<p>Phone: +420 xxx xxx xxx</p>
-</div>
+        const serviceCards = document.querySelectorAll('.service-card');
+        serviceCards.forEach((card, index) => {
+            card.style.animationDelay = (index * 0.1) + 's';
+        });
 
-<div>
-<h3>Address</h3>
-<p>Address will be added here</p>
-</div>
-
-</div>
-
-<p class="copyright">© 2026 FOIA</p>
-
-</footer>
-
+        document.addEventListener('DOMContentLoaded', function() {
+            // Portfolio loaded
+        });
+    </script>
 </body>
 </html>
